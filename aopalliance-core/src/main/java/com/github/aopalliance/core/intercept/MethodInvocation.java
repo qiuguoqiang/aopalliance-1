@@ -3,9 +3,7 @@ package com.github.aopalliance.core.intercept;
 import java.lang.reflect.Method;
 
 /**
- * Description of an invocation to a method, given to an interceptor
- * upon method-call.
- *
+ * 方法拦截器.
  * 一次方法调用是一个连接点,并能够被方法拦截器所拦截.
  *
  * @author daniel lee

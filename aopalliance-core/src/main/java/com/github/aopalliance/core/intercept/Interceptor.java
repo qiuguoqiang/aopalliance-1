@@ -6,11 +6,8 @@ import com.github.aopalliance.core.aop.Advice;
 /**
  * 本接口代表通用拦截器.
  *
- * 通用拦截器能够拦截发生在基本程序中的运行时事件.
- * <p>A generic interceptor can intercept runtime events that occur
- * within a base program. Those events are materialized by (reified
- * in) joinpoints. Runtime joinpoints can be invocations, field
- * access, 。...
+ * 通用拦截器能够拦截发生在程序中的运行时事件.
+ * 这些事件通过(指定)连接点来实现.运行时连接点可以是调用、域访问等.
  *
  * 本接口不能直接被使用. 而是使用子接口来拦截特定事件.
  * 例如,以下类为了实现调试器而实现了一些特定的拦截器:
@@ -49,6 +46,7 @@ import com.github.aopalliance.core.aop.Advice;
  * }
  * </pre>
  *
+ * @author daniel lee
  * @see Joinpoint
  */
 public interface Interceptor extends Advice {

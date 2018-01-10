@@ -10,32 +10,34 @@ import java.lang.reflect.Field;
  */
 public interface FieldAccess extends Joinpoint {
 
-   /** The read access type (see {@link #getAccessType()}). */
-   int READ=0;
-   /** The write access type (see {@link #getAccessType()}). */
-   int WRITE=1;
+    /** READ访问类型(看{@link #getAccessType()}).   */
+    int READ   =  0;
+
+    /** WRITE访问类型 (看{@link #getAccessType()}). */
+    int WRITE  =  1;
 
     /**
-     * Gets the field being accessed.
+     * 获取正在被访问的域.
      *
-     * <p>This method is a frienly implementation of the {@link
-     * Joinpoint#getStaticPart()} method (same result).
+     * 本方法是{@link Joinpoint#getStaticPart()}方法的友好实现.
+     * 两者具有相同返回结果.
      *
-     * @return the field being accessed.  */
+     * @return the field being accessed.
+     */
     Field getField();
 
-   /**
-    * Gets the value that must be set to the field.
-    *
-    * <p>This value can be intercepted and changed by a field
-    * interceptor. */
-   Object getValueToSet();
+    /**
+     * 获取应设置到域中的值
+     * 这个值可以被拦截到并且被拦截器改变值.
+     */
+    Object getValueToSet();
 
-   /**
-    * Returns the access type.
-    *
-    * @return FieldAccess.READ || FieldAccess.WRITE */
-   int getAccessType();
+    /**
+     * 返回访问类型.
+     *
+     * @return FieldAccess.READ || FieldAccess.WRITE
+     */
+    int getAccessType();
 
 }
 

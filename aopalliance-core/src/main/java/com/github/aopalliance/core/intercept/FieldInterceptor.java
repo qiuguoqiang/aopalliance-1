@@ -1,14 +1,12 @@
 package com.github.aopalliance.core.intercept;
 
 /**
- * Intercepts field access on a target object.
+ * 拦截目标对象的域访问操作.
  *
- * <p>The user should implement the {@link #set(FieldAccess)} and
- * {@link #get(FieldAccess)} methods to modify the original
- * behavior. E.g. the following class implements a tracing interceptor
- * (traces the accesses to the intercepted field(s)):
- *
- * <pre class=code>
+ * 用户应该实现{@link #set(FieldAccess)}方法和
+ * {@link #get(FieldAccess)}来修改原始行为.
+ * 例如,以下类实现了跟踪拦截器(跟踪被拦截域的访问):
+ * <pre>
  * class TracingInterceptor implements FieldInterceptor {
  *
  *   Object set(FieldAccess fa) throws Throwable {
@@ -26,42 +24,30 @@ package com.github.aopalliance.core.intercept;
  *     return ret;
  *   }
  * }
- * </pre> */
+ * </pre>
+ *
+ * @author daniel lee
+ */
+public interface FieldInterceptor extends Interceptor {
 
-public interface FieldInterceptor extends Interceptor
-{
     /**
-     * Do the stuff you want to do before and after the
-     * field is getted.
+     * 在field获取前、后实现操作.
+     * 优雅的实现会调用{@link Joinpoint#proceed()}(内部封装本方法)来实现.
      *
-     * <p>Polite implementations would certainly like to call
-     * {@link Joinpoint#proceed()}.
-     *
-     * @param fieldRead the joinpoint that corresponds to the field
-     * read
-     * @return the result of the field read {@link
-     * Joinpoint#proceed()}, might be intercepted by the
-     * interceptor.
-     *
-     * @throws Throwable if the interceptors or the
-     * target-object throws an exception.  */
+     * @param fieldRead 域READ相关的连接点
+     * @return 域获取{@link Joinpoint#proceed()}的结果,可能被拦截器所拦截.
+     * @throws Throwable 如果拦截器或目标对象抛出异常.
+     */
     Object get(FieldAccess fieldRead) throws Throwable;
 
     /**
-     * Do the stuff you want to do before and after the
-     * field is setted.
+     * 在field设置前、后实现操作.
+     * 优雅的实现会调用{@link Joinpoint#proceed()}(内部封装本方法)来实现.
      *
-     * <p>Polite implementations would certainly like to implement
-     * {@link Joinpoint#proceed()}.
-     *
-     * @param fieldWrite the joinpoint that corresponds to the field
-     * write
-     * @return the result of the field set {@link
-     * Joinpoint#proceed()}, might be intercepted by the
-     * interceptor.
-     *
-     * @throws Throwable if the interceptors or the
-     * target-object throws an exception.  */
+     * @param fieldWrite 域WRITE相关的连接点
+     * @return 域设置{@link Joinpoint#proceed()}的结果,可能被拦截器所拦截.
+     * @throws Throwable 如果拦截器或目标对象抛出异常.
+     */
     Object set(FieldAccess fieldWrite) throws Throwable;
 
 }

@@ -3,11 +3,8 @@ package com.github.aopalliance.core.intercept;
 /**
  * 用于拦截新建对象的构造器.
  *
- * <p>The user should implement the {@link
- * #construct(ConstructorInvocation)} method to modify the original
- * behavior. E.g. the following class implements a singleton
- * interceptor (allows only one unique instance for the intercepted
- * class):
+ * 用户应该实现{@link #construct(ConstructorInvocation)}方法来修改原始行为.
+ * 例如,以下类实现了一个单例拦截器(允许仅一个唯一实例用于被拦截的类):
  *
  * <pre class=code>
  * class DebuggingInterceptor implements ConstructorInterceptor {
@@ -21,20 +18,19 @@ package com.github.aopalliance.core.intercept;
  *     }
  *   }
  * }
- * </pre> */
-
+ * </pre>
+ *
+ * @author daniel lee
+ */
 public interface ConstructorInterceptor extends Interceptor {
+
     /**
-     * Implement this method to perform extra treatments before and
-     * after the consrution of a new object. Polite implementations
-     * would certainly like to invoke {@link Joinpoint#proceed()}.
+     * 实现该方法会在新对象构造之前、之后执行额外的操作.
+     * 优雅的实现会调用{@link Joinpoint#proceed()}(内部封装本方法)来实现.
      *
-     * @param invocation the construction joinpoint
-     * @return the newly created object, which is also the result of
-     * the call to {@link Joinpoint#proceed()}, might be replaced by
-     * the interceptor.
-     *
-     * @throws Throwable if the interceptors or the
-     * target-object throws an exception.  */
+     * @param invocation 方法调用连接点.
+     * @return 新创建的对象, 对象通常调用{@link Joinpoint#proceed()}的结果,可能被拦截器所替代.
+     * @throws Throwable 如果拦截器或目标对象抛出异常.
+     */
     Object construct(ConstructorInvocation invocation) throws Throwable;
 }
